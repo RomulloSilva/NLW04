@@ -1,6 +1,12 @@
+import 'reflect-metadata';
 import express, { response } from 'express';
+import './database';
+import { router } from './router';
 
 const app = express();
+
+
+
 
 /**
  * GET      = Busca
@@ -12,14 +18,8 @@ const app = express();
 
  //http://localhost:3333/users
 
-app.get("/", (request, response) =>{
+app.use(express.json());
 
-    return response.json({message: "Hello my name is Romulo"});
-});
-
-app.post("/", (request, response) =>{
-
-    return response.json({message: "Os dados foram salvos com sucesso!!"});
-});
+app.use(router);
 
 app.listen(3333, ()=> console.log("Servidor está rodando!!"));
