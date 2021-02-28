@@ -1,13 +1,13 @@
-import {Request, Response} from 'express';
-import { getRepository } from 'typeorm';
-import { User } from '../models/User';
+import { Request, Response } from 'express';
+import { getCustomRepository } from 'typeorm';
+import { UsersRepository } from '../repositories/UserRepository';
 class UserController{
 
     async create(request: Request, response: Response){
 
         const {name, email} = request.body;
 
-        const usersRepository = getRepository(User);
+        const usersRepository = getCustomRepository(UsersRepository);
 
 
         //SELECT * FROM USERS WHERE EMAIL = "EMAIL"
@@ -29,8 +29,8 @@ class UserController{
 
 
 
-        return response.json(user);
+        return response.status(201).json(user);
     }
 }
 
-export {UserController}
+export { UserController };
